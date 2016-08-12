@@ -3,12 +3,12 @@
     <input [(ngModel)]="temp.zipCode" name="zipcode" placeholder="Type an 8 diget zipcode" > <br><br>
 
     <strong>Units:</strong><br>
-    <input type="radio" name="units" value="f" (click)="changeUnits('f')" > Fahrenheit <br>
-    <input type="radio" name="units" value="c" (click)="changeUnits('c')" > Celsius <br><br>
+    <input type="radio" name="units" value="f" (click)="changeUnits('f')" [checked]="temp.metric===0" > Fahrenheit <br>
+    <input type="radio" name="units" value="c" (click)="changeUnits('c')" [checked]="temp.metric===1"> Celsius <br><br>
     
     <strong>Average based on </strong><br>
-    <input type="radio" name="avg" value="h" (click)="changeHighLow('h')" >  High <br>
-    <input type="radio" name="avg" value="c"  (click)="changeHighLow('l')" > Low <br> <br>
+    <input type="radio" name="avg" value="h" (click)="changeHighLow('h')" [checked]="temp.highlow===4" >  High <br>
+    <input type="radio" name="avg" value="c"  (click)="changeHighLow('l')" [checked]="temp.highlow===2" > Low <br> <br>
     
     
     <strong>First Date:</strong> <br>
@@ -19,12 +19,16 @@
 </form> 
 
 <button (click)="getAverage()"><strong>Get Average</strong></button> 
+<button (click)="reset()"><strong>Reset</strong></button> 
+
 <div *ngIf="average">
-    <h2> The average temp is {{ average }} degrees {{ temp.getMetric() }}</h2>
+    <h2>The average temp is {{ average }} degrees {{ temp.getMetric() }}</h2>
 </div>
+
 <div *ngIf="errorMessage">
-    <h2> There was an error Please try again</h2>
+    <h2>There was an error Please try again</h2>
 </div>
+
 <div *ngIf="notallDataFilledIn">
-    <h2>Please Fill in all valuesP</h2>
+    <h2>Please Fill in all values</h2>
 </div>

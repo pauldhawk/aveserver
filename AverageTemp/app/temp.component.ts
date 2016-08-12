@@ -23,8 +23,8 @@ export class TempComponent implements OnInit {
         this.dataReceived = false;
     }
 
-    allValid(){
-        if (this.temp.zipCode == null || this.temp.firstDate == null || this.temp.secondDate == null 
+    allValid(){ // simple check to make sure all data filled out
+        if (this.temp.zipCode == '' || this.temp.firstDate == '' || this.temp.secondDate == '' 
             || this.temp.metric == null || this.temp.highlow == null) {
                 return false;
             }
@@ -34,17 +34,19 @@ export class TempComponent implements OnInit {
     getAverage() {
         if (this.allValid() == false) { this.notallDataFilledIn = true; }
         else {
+            this.notallDataFilledIn = false;
             let a = this._getTempData.getData(this.temp.zipCode, this.temp.firstDate);
             let b = this._getTempData.getData(this.temp.zipCode, this.temp.secondDate);
             Promise.all([a,b])
                 .then(
-                    data => this.temp.addData(data),
-                    err => this.errorMessage = err )
-                    .then(
-                        () => this.average = this.temp.getAverage())
+                    data => {   this.temp.addData(data);
+                                this.errorMessage = false;
+                                this.dataReceived = true;
+                    },
+                    err => this.errorMessage = true )
+                .then(
+                    () =>  this.average = this.temp.getAverage()) 
                 .catch( () => this.errorMessage = true );
-                this.dataReceived = true;
-                this.notallDataFilledIn = false;
         }
     }
     
@@ -68,7 +70,11 @@ export class TempComponent implements OnInit {
                 this.temp.highlow = HighLow.Low; break;
             default: this.temp.highlow = null;
         }
+        console.log(this.temp.highlow);
         if (this.dataReceived == true) { this.average = this.temp.getAverage();}
+    }
+    reset() {
+        this.temp = new Temp();
     }
 
 

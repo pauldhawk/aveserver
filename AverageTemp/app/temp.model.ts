@@ -24,6 +24,7 @@ export class Temp {
     }
     getAverage(): number {
         if  (this.firstData != null &&  this.secondData != null) {
+
             let tempOne: number = this.getTemp(this.firstData);
             let tempTwo : number = this.getTemp(this.secondData);
 
@@ -64,7 +65,7 @@ export class Temp {
 
 
 export enum Metric {
-    C, 
+    C = 0, 
     F
 }
 

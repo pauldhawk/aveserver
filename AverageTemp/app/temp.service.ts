@@ -3,7 +3,6 @@ import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import { Temp } from './temp.model';
-import { dataOne, dataTwo } from './temp.mock.data';
 
 
 
@@ -28,7 +27,6 @@ export class TempService {
             .catch(this.handleError);
     }
  
-
     private extractData(res: Response) {
         let body = res.json();
         return body.data || {};
