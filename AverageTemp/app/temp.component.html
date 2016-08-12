@@ -1,0 +1,30 @@
+<form> 
+    <strong> Zip Code: </strong> 
+    <input [(ngModel)]="temp.zipCode" name="zipcode" placeholder="Type an 8 diget zipcode" > <br><br>
+
+    <strong>Units:</strong><br>
+    <input type="radio" name="units" value="f" (click)="changeUnits('f')" > Fahrenheit <br>
+    <input type="radio" name="units" value="c" (click)="changeUnits('c')" > Celsius <br><br>
+    
+    <strong>Average based on </strong><br>
+    <input type="radio" name="avg" value="h" (click)="changeHighLow('h')" >  High <br>
+    <input type="radio" name="avg" value="c"  (click)="changeHighLow('l')" > Low <br> <br>
+    
+    
+    <strong>First Date:</strong> <br>
+    <input type="date" [(ngModel)]="temp.firstDate" name="firstDate" > <br>
+    <strong>Second Data:</strong> <br>
+     <input type="date" [(ngModel)]="temp.secondDate" name="secondDate" > <br>
+
+</form> 
+
+<button (click)="getAverage()"><strong>Get Average</strong></button> 
+<div *ngIf="average">
+    <h2> The average temp is {{ average }} degrees {{ temp.getMetric() }}</h2>
+</div>
+<div *ngIf="errorMessage">
+    <h2> There was an error Please try again</h2>
+</div>
+<div *ngIf="notallDataFilledIn">
+    <h2>Please Fill in all valuesP</h2>
+</div>
