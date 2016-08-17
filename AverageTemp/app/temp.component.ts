@@ -19,7 +19,7 @@ export class TempComponent implements OnInit {
     ngOnInit() {
         this.temp = new Temp();
         this.dataReceived = false;
-        this.setFakeData(); /// for testing
+        // this.setFakeData(); /// for testing
     }
 
     setFakeData() {
