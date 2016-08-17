@@ -8,6 +8,8 @@ export class Temp {
     
     metric: Metric;
     highlow: HighLow;
+    errors: boolean;
+    notallDataFilledIn: boolean;
 
     constructor( ) {
         this.zipCode = '';
@@ -15,18 +17,19 @@ export class Temp {
         this.secondDate = ''; 
     }
     
-    getMetric() {
+    metricToString() {
         switch (this.metric){
             case Metric.C: return "Celsius";
             case Metric.F: return "Fahrenheit";
             default: return "";
         }
     }
-    getAverage(): number {
+
+    average(): number {
         if  (this.firstData != null &&  this.secondData != null) {
 
-            let tempOne: number = this.getTemp(this.firstData);
-            let tempTwo : number = this.getTemp(this.secondData);
+            var tempOne: number = this.getTemp(this.firstData);
+            var tempTwo : number = this.getTemp(this.secondData);
 
             if ( tempOne !== null && tempTwo !== null ) {
                 return (tempOne + tempTwo) / 2
@@ -35,11 +38,46 @@ export class Temp {
         return null;
     }
 
-    addData(data: any[]) {
-            this.firstData = data[0];
-            this.secondData =  data[1];
+    highlowToSting() : String{
+        switch (this.highlow) {
+            case 2: 
+            return "low";
+            case 4:
+                return "high";
+            default: 
+                return "error getting high / low";
+        }
     }
 
+    addData(data: any[]) {
+        this.firstData = null;
+        this.secondData = null;
+        this.firstData = data[0];
+        this.secondData =  data[1];
+        console.log(this.firstData.weather[0].mintempC);
+        console.log(this.secondData.weather[0].mintempC);
+    }
+
+    setMetric(val: String ) {
+       switch (val) {
+            case "f":
+                this.metric = Metric.F; break;
+            case "c":
+                this.metric = Metric.C; break;
+            default:
+                this.metric = null;
+        }
+    }
+
+    setHighLow (val : String) {
+        switch (val) {
+            case "h":
+                this.highlow = HighLow.High; break;
+            case "l":
+                this.highlow = HighLow.Low; break;
+            default: this.highlow = null;
+        }
+    }
     getTemp(data: any) : number { // return data based on if high or low c or f
         let num = this.metric + this.highlow; 
         switch (num) {
@@ -60,6 +98,13 @@ export class Temp {
         }
     }
 
+    dataFilledIn (): Boolean {
+        if (this.zipCode == '' || this.firstDate == '' || this.secondDate == '' 
+            || this.metric == null || this.highlow == null) {
+                return false;
+            }
+        return true;
+    }
 
 }
 

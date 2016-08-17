@@ -21,14 +21,17 @@
 <button (click)="getAverage()"><strong>Get Average</strong></button> 
 <button (click)="reset()"><strong>Reset</strong></button> 
 
-<div *ngIf="average">
-    <h2>The average temp is {{ average }} degrees {{ temp.getMetric() }}</h2>
-</div>
-
-<div *ngIf="errorMessage">
+<div *ngIf="temp.errors">
     <h2>There was an error Please try again</h2>
 </div>
 
-<div *ngIf="notallDataFilledIn">
+<div *ngIf="temp.notallDataFilledIn">
     <h2>Please Fill in all values</h2>
+</div>
+
+<div *ngIf="average">
+    <h2>The average <strong> {{ temp.highlowToSting() }} temp is {{ average }} degrees {{ temp.metricToString() }} </strong> </h2>
+    <br> Data <br> 
+    {{ temp.firstDate }}'s {{ temp.highlowToSting() }} was {{ temp.getTemp(temp.firstData)}} degrees {{ temp.metricToString() }} <br>
+    {{ temp.secondDate }}'s {{ temp.highlowToSting() }} was {{  temp.getTemp(temp.secondData) }} degrees {{ temp.metricToString() }} <br> 
 </div>

@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import { Temp } from './temp.model';
-
+import { dataOne, dataTwo } from './temp.mock.data'
 
 
 @Injectable()
@@ -13,7 +13,7 @@ export class TempService {
 
     getUrl(zip: string, date: string): string {
         var url = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=9b370cc71d7b47eda0a185723161108&includelocation=yes&format=json&tp=24";
-        var q = `&q=${zip}&dateP=${date}`
+        var q = `&q=${zip}&date=${date}`
         var result = url+q;
         console.log(result);
         return result;
