@@ -1,0 +1,19 @@
+{
+  "name": "WebServer",
+  "dependencies": {
+    "body-parser": "registry:npm/body-parser#1.15.2+20160815132839",
+    "express": "registry:npm/express#4.14.0+20160815112707"
+  },
+  "globalDependencies": {
+    "angular-protractor": "registry:dt/angular-protractor#1.5.0+20160425143459",
+    "compression": "registry:dt/compression#0.0.0+20160501162003",
+    "core-js": "registry:dt/core-js#0.0.0+20160725163759",
+    "express-serve-static-core": "registry:dt/express-serve-static-core#4.0.0+20160817171221",
+    "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
+    "mime": "registry:dt/mime#0.0.0+20160316155526",
+    "morgan": "registry:dt/morgan#1.7.0+20160524142355",
+    "node": "registry:env/node#6.0.0+20160813135048",
+    "selenium-webdriver": "registry:dt/selenium-webdriver#2.44.0+20160317120654",
+    "serve-favicon": "registry:dt/serve-favicon#0.0.0+20160316155526"
+  }
+}
